@@ -3,10 +3,15 @@ type SiteFooterProps = {
 };
 
 export default function SiteFooter({ showImpressumLink = false }: SiteFooterProps) {
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="h-14 md:h-20 bg-black text-gray-300 px-4 md:px-20 flex items-center justify-center">
             <div className="text-center text-sm">
-                <span className="block md:inline">&copy; 2025 Lucas-Maurice Stein</span>
+        <span className="block md:inline">
+          &copy; {currentYear} Lucas-Maurice Stein
+        </span>
+
                 {showImpressumLink && (
                     <>
                         <span className="mx-2 hidden md:inline">|</span>
