@@ -1,12 +1,11 @@
 @import "tailwindcss";
 
-/* Deine Basis-Variablen */
+/* Basis-Variablen */
 :root {
   --background: #ffffff;
   --foreground: #171717;
 
   /* next/font setzt --font-bebas-neue auf <html> */
-  /* Wir mappen es auf ein Tailwind-Font-Token: */
   --font-bebas: var(--font-bebas-neue);
 }
 
@@ -17,18 +16,34 @@
   }
 }
 
-/* Tailwind v4 Theme Tokens (ein Block!) */
+/* Tailwind v4 Theme Tokens */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
-  /* Falls du Geist wirklich nutzt, sonst kannst du diese zwei Zeilen löschen */
+  /* nur relevant, wenn du Geist nutzt */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 
-  /* Das ist der wichtige Teil:
-     erzeugt die Utility-Klasse `font-bebas` */
+  /* erzeugt die Utility `font-bebas` */
   --font-bebas: var(--font-bebas);
+}
+
+/* 🌊 Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 🧭 Offset für Fixed Navbar (h-14 ≈ 56px) */
+section[id] {
+  scroll-margin-top: 4rem;
+}
+
+/* Optional: etwas weicheres Scroll-Verhalten auf iOS */
+@supports (-webkit-overflow-scrolling: touch) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 body {
