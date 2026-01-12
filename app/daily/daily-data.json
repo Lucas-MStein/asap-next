@@ -1,0 +1,57 @@
+{
+  "projectStart": "12. Januar 2026",
+  "weeks": [
+    {
+      "week": 1,
+      "entries": [
+        {
+          "date": "12.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        },
+        {
+          "date": "13.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        },
+        {
+          "date": "14.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        },
+        {
+          "date": "15.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        },
+        {
+          "date": "16.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        }
+      ]
+    },
+    {
+      "week": 2,
+      "entries": [
+        {
+          "date": "19.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        },
+        {
+          "date": "20.01.26",
+          "initialCommitDone": "-",
+          "extras": "-",
+          "notes": "-"
+        }
+      ]
+    }
+  ]
+}
