@@ -28,7 +28,7 @@ export default function RootLayout({
 }) {
     return (
         <html lang="de" className={bebas.variable}>
-        <body className="bg-white text-black pt-14 antialiased">
+        <body className="bg-white text-black antialiased">
         {children}
         </body>
         </html>
