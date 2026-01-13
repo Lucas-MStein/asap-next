@@ -2,14 +2,37 @@
 
 import { useEffect, useState } from "react";
 
+type NavItem = {
+    href: string;
+    label: string;
+};
+
+const NAV_ITEMS: NavItem[] = [
+    { href: "#home", label: "Home" },
+    { href: "#blog", label: "Blog" },
+    { href: "#about", label: "Über" },
+    { href: "#kontakt", label: "Kontakt" },
+];
+
 export default function HomeNavbar() {
     const [mobileOpen, setMobileOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [activeHash, setActiveHash] = useState<string>("#home");
 
     useEffect(() => {
-        const onScroll = () => setScrolled(window.scrollY > 10);
+        const onScroll = () => {
+            setScrolled(window.scrollY > 10);
+        };
+
+        const onHashChange = () => {
+            setActiveHash(window.location.hash || "#home");
+        };
+
         onScroll();
+        onHashChange();
+
         window.addEventListener("scroll", onScroll);
+        window.addEventListener("hashchange", onHashChange);
 
         const onDocClick = (e: MouseEvent) => {
             const target = e.target as HTMLElement | null;
@@ -28,58 +51,84 @@ export default function HomeNavbar() {
 
         return () => {
             window.removeEventListener("scroll", onScroll);
+            window.removeEventListener("hashchange", onHashChange);
             document.removeEventListener("click", onDocClick);
         };
     }, []);
 
+    const navBase =
+        "fixed top-0 left-0 right-0 z-50 h-14 transition-all duration-300";
+    const navTop = "bg-black/30 backdrop-blur-sm";
+    const navScrolled =
+        "bg-black/80 backdrop-blur-md shadow-lg border-b border-white/10";
+
     return (
         <>
-            <nav
-                id="navbar"
-                className={[
-                    "fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-white h-14",
-                    scrolled ? "bg-black shadow-md" : "bg-transparent",
-                ].join(" ")}
-            >
-                <div className="container mx-auto flex items-center justify-between h-full px-4 md:px-6">
-                    <div className="flex items-center space-x-2">
+            <nav id="navbar" className={`${navBase} ${scrolled ? navScrolled : navTop}`}>
+                {/* Gold line (Signature Detail) */}
+                <div
+                    className={`absolute left-0 right-0 top-0 h-[2px] transition-opacity duration-300 ${
+                        scrolled ? "opacity-100 bg-[#d4af37]" : "opacity-0"
+                    }`}
+                />
+
+                <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-4 md:px-6">
+                    {/* Brand */}
+                    <a
+                        href="#home"
+                        className="group inline-flex items-center gap-2 text-white"
+                        aria-label="Zur Startseite"
+                    >
                         <img
                             src="/img/asap-logo.png"
                             alt="A$AP Logo"
-                            className="h-6 w-auto"
+                            className="h-6 w-auto opacity-95 group-hover:opacity-100 transition"
                         />
                         <span className="text-sm font-semibold uppercase tracking-wider">
-              alwaysstriveandprosper
+              ALWAYS<span className="text-[#d4af37]">STRIVE</span>ANDPROSPER
             </span>
-                    </div>
+                    </a>
 
-                    <ul className="hidden md:flex items-center space-x-8 text-sm">
-                        <li>
-                            <a href="#home" className="hover:text-[#d4af37]">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#blog" className="hover:text-[#d4af37]">
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#about" className="hover:text-[#d4af37]">
-                                Über
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#kontakt" className="hover:text-[#d4af37]">
-                                Kontakt
-                            </a>
-                        </li>
+                    {/* Desktop Navigation */}
+                    <ul className="hidden md:flex items-center gap-8 text-sm">
+                        {NAV_ITEMS.map((item) => {
+                            const isActive = activeHash === item.href;
+
+                            return (
+                                <li key={item.href}>
+                                    <a
+                                        href={item.href}
+                                        className={[
+                                            "relative py-2 transition",
+                                            isActive
+                                                ? "text-[#d4af37]"
+                                                : "text-white/80 hover:text-white",
+                                        ].join(" ")}
+                                    >
+                                        {item.label}
+
+                                        {/* Gold underline */}
+                                        <span
+                                            className={[
+                                                "absolute left-0 -bottom-1 h-[2px] bg-[#d4af37] transition-all duration-300",
+                                                isActive ? "w-full" : "w-0 hover:w-full",
+                                            ].join(" ")}
+                                        />
+                                    </a>
+                                </li>
+                            );
+                        })}
                     </ul>
 
-                    <div className="md:hidden">
+                    {/* Right controls */}
+                    <div className="flex items-center gap-3">
+                        {/* Accent dot */}
+                        <span className="hidden md:inline-block h-2 w-2 rounded-full bg-[#d4af37]" />
+
+                        {/* Mobile menu toggle */}
                         <button
                             id="menu-toggle"
-                            className="focus:outline-none transition"
+                            className="md:hidden inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 transition"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setMobileOpen((v) => !v);
@@ -90,7 +139,7 @@ export default function HomeNavbar() {
                             type="button"
                         >
                             <svg
-                                className="h-7 w-7 stroke-[#d4af37] hover:stroke-yellow-400 transition duration-300"
+                                className="h-6 w-6 stroke-[#d4af37]"
                                 viewBox="0 0 24 24"
                                 fill="none"
                                 strokeWidth={2}
@@ -102,55 +151,37 @@ export default function HomeNavbar() {
                     </div>
                 </div>
 
+                {/* Mobile Menu */}
                 <div
                     id="mobile-menu"
                     className={[
-                        "md:hidden bg-black text-white px-4 pt-4 pb-6 rounded-b-xl shadow-lg animate-fade-down origin-top transition-all duration-300",
+                        "md:hidden overflow-hidden transition-all duration-300 origin-top",
                         mobileOpen ? "block" : "hidden",
                     ].join(" ")}
                 >
-                    <ul className="flex flex-col space-y-4 text-base text-center font-medium tracking-wide">
-                        <li>
-                            <a
-                                href="#home"
-                                className="block py-1 border-b border-gray-700 hover:text-[#d4af37] transition"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#blog"
-                                className="block py-1 border-b border-gray-700 hover:text-[#d4af37] transition"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                Blog
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#about"
-                                className="block py-1 border-b border-gray-700 hover:text-[#d4af37] transition"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                Über
-                            </a>
-                        </li>
-                        <li>
-                            <a
-                                href="#kontakt"
-                                className="block py-1 hover:text-[#d4af37] transition"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                Kontakt
-                            </a>
-                        </li>
-                    </ul>
+                    <div className="mx-auto max-w-6xl px-4 pb-6">
+                        <div className="mt-3 rounded-2xl border border-white/10 bg-black/90 backdrop-blur-md shadow-xl">
+                            <div className="h-[2px] bg-[#d4af37] rounded-t-2xl" />
+
+                            <ul className="flex flex-col py-3 text-center text-base font-medium tracking-wide text-white">
+                                {NAV_ITEMS.map((item) => (
+                                    <li key={item.href}>
+                                        <a
+                                            href={item.href}
+                                            className="block py-3 hover:text-[#d4af37] transition border-b border-white/10"
+                                            onClick={() => setMobileOpen(false)}
+                                        >
+                                            {item.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
-            {/* ✅ Spacer: kompensiert die fixed Navbar-Höhe auf der Startseite */}
+            {/* Spacer for fixed navbar */}
             <div className="h-14" aria-hidden="true" />
         </>
     );
