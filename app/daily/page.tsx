@@ -180,14 +180,23 @@ export default function DailyPage() {
                         <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
                     </div>
 
-                    {/* Hint */}
-                    <p className="text-lg text-neutral-800">
-                        Weitere Materialien findest du unter{" "}
-                        <a href="/downloads" className="text-[#d4af37] hover:underline font-medium">
-                            Downloads
+                    <section className="mt-10 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-6 md:p-10 shadow-lg">
+                        <div>
+                            <h3 className="text-xl md:text-2xl font-extrabold">
+                                Weitere Materialien
+                            </h3>
+                            <p className="mt-2 text-neutral-600">
+                                PDFs und zusätzliche Inhalte findest du im Download-Bereich.
+                            </p>
+                        </div>
+
+                        <a
+                            href="/downloads"
+                            className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-semibold shadow-md hover:bg-neutral-900 transition"
+                        >
+                            Zu den Downloads →
                         </a>
-                        .
-                    </p>
+                    </section>
                 </div>
             </main>
 

@@ -102,12 +102,6 @@ export default function DownloadsPage() {
                         {/* bottom accent */}
                         <div className="h-2 bg-gradient-to-r from-[#d4af37] via-neutral-900 to-black" />
                     </section>
-
-                    {/* Divider “Balken” */}
-                    <div className="my-10 md:my-14">
-                        <div className="h-px bg-neutral-200" />
-                        <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </div>
                 </div>
             </main>
 

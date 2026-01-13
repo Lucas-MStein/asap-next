@@ -144,6 +144,12 @@ export default function InitialPage() {
                         <div className="h-2 bg-gradient-to-r from-[#d4af37] via-neutral-900 to-black" />
                     </section>
 
+                    {/* Divider (Balken wie Startseite) */}
+                    <div className="my-10 md:my-14">
+                        <div className="h-px bg-neutral-200" />
+                        <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
+                    </div>
+
                     {/* CTA */}
                     <section className="mt-10 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-6 md:p-10 shadow-lg">
                         <div>
