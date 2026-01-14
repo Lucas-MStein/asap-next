@@ -1,5 +1,6 @@
 import HomeNavbar from "@/components/HomeNavbar";
 import SiteFooter from "@/components/SiteFooter";
+import Image from "next/image";
 
 export default function HomePage() {
     return (
@@ -80,21 +81,58 @@ export default function HomePage() {
 
             {/* About */}
             <section id="about" className="py-28 bg-gray-100 text-black px-4 md:px-20">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                        Über mich
-                    </h2>
-                    <p className="text-lg leading-relaxed mt-6">
-                        Ich bin <span className="font-semibold">Lucas-Maurice Stein</span>,
-                        kreativer Kopf und Musikliebhaber. Dieser Blog ist mein digitaler
-                        Ausdruck von <span className="italic">Street Culture</span>, Kunst
-                        und Style – inspiriert von <strong>A$AP Rocky</strong> und der Idee,
-                        immer zu wachsen:{" "}
-                        <span className="text-[#d4af37] font-semibold">
-              Always Strive And Prosper
+                <div className="max-w-6xl mx-auto">
+                    <div className="text-center mb-12">
+                        <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
+                            Über mich
+                        </h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+                        {/* Bild */}
+                        <div className="relative w-full max-w-md mx-auto">
+                            <div className="rounded-2xl overflow-hidden shadow-2xl border border-black/10">
+                                <Image
+                                    src="/img/me.webp"
+                                    alt="Foto von Lucas-Maurice Stein"
+                                    width={900}
+                                    height={1100}
+                                    className="w-full h-auto object-cover"
+                                    priority={false}
+                                />
+                            </div>
+
+                            {/* goldener Akzent */}
+                            <div className="absolute -bottom-3 -right-3 h-16 w-16 rounded-2xl bg-[#d4af37] shadow-lg" />
+                        </div>
+
+                        {/* Text */}
+                        <div>
+                            <p className="text-lg leading-relaxed">
+                                Ich bin <span className="font-semibold">Lucas-Maurice Stein</span>,
+                                kreativer Kopf und Musikliebhaber. Dieser Blog ist mein digitaler
+                                Ausdruck von <span className="italic">Street Culture</span>, Kunst und
+                                Style – inspiriert von <strong>A$AP Rocky</strong> und der Idee, immer
+                                zu wachsen:{" "}
+                                <span className="text-[#d4af37] font-semibold">
+            Always Strive And Prosper
+          </span>
+                                .
+                            </p>
+
+                            {/* kleine Highlights (optional) */}
+                            <div className="mt-6 flex flex-wrap gap-3">
+                                {["Kreativität", "Kultur", "Growth"].map((t) => (
+                                    <span
+                                        key={t}
+                                        className="px-4 py-2 rounded-full bg-white border border-black/10 shadow-sm text-sm"
+                                    >
+              {t}
             </span>
-                        .
-                    </p>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </section>
 
