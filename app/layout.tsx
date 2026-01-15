@@ -30,7 +30,7 @@ export const metadata: Metadata = {
         images: [
             {
                 // ✅ hier das quadratische Icon als OG-Image
-                url: "/opengraph-image.png",
+                url: "/opengraph-image.jpg",
                 width: 512,
                 height: 512,
                 alt: "Always Strive And Prosper",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         title: "Always Strive And Prosper",
         description:
             "A digital space inspired by the world's leading creative minds – Street Culture, Kunst & persönliches Wachstum.",
-        images: ["/opengraph-image.png"],
+        images: ["/opengraph-image.jpg"],
     },
 
     alternates: {
