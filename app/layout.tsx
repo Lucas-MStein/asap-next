@@ -44,7 +44,7 @@ export const metadata: Metadata = {
         title: "Always Strive And Prosper",
         description:
             "A digital space inspired by the world's leading creative minds – Street Culture, Kunst & persönliches Wachstum.",
-        images: ["/opengraph-image.png"],
+        images: ["/opengraph-image.webp"],
     },
 
     alternates: {
