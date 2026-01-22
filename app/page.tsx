@@ -119,18 +119,6 @@ export default function HomePage() {
           </span>
                                 .
                             </p>
-
-                            {/* kleine Highlights (optional) */}
-                            <div className="mt-6 flex flex-wrap gap-3">
-                                {["Kreativität", "Kultur", "Growth"].map((t) => (
-                                    <span
-                                        key={t}
-                                        className="px-4 py-2 rounded-full bg-white border border-black/10 shadow-sm text-sm"
-                                    >
-              {t}
-            </span>
-                                ))}
-                            </div>
                         </div>
                     </div>
                 </div>
