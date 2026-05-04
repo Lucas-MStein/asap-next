@@ -36,19 +36,6 @@ export default function InitialPage() {
                         Kreativität, Kultur und persönliches Wachstum.
                     </p>
 
-                    {/* Quick stats / chips */}
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        {["6AM Morningwalk", "Natürliche Dopaminquellen", "Geistiges Wachstum"].map(
-                            (label) => (
-                                <span
-                                    key={label}
-                                    className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/85 hover:bg-white/10 transition"
-                                >
-                  {label}
-                </span>
-                            )
-                        )}
-                    </div>
                 </div>
             </section>
 
