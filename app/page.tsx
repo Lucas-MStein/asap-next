@@ -9,10 +9,13 @@ export default function HomePage() {
 
             {/* Hero */}
             <section id="home" className="relative w-full h-screen bg-black">
-                <img
+                <Image
                     src="/img/rocky.jpg"
                     alt="ASAP Rocky"
-                    className="w-full h-full object-cover opacity-80"
+                    fill
+                    priority
+                    sizes="100vw"
+                    className="object-cover opacity-80"
                 />
                 <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
                     <h1 className="text-5xl md:text-7xl font-bebas uppercase tracking-wide italic">
@@ -142,7 +145,7 @@ export default function HomePage() {
                 </div>
             </section>
 
-            <SiteFooter showImpressumLink />
+            <SiteFooter showLegalLinks />
         </>
     );
 }
