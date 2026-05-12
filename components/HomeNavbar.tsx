@@ -11,7 +11,7 @@ const NAV_ITEMS: NavItem[] = [
     { href: "#home", label: "Home" },
     { href: "#blog", label: "Blog" },
     { href: "#about", label: "Über" },
-    { href: "#kontakt", label: "Kontakt" },
+    { href: "#contact", label: "Kontakt" },
 ];
 
 export default function HomeNavbar() {
@@ -34,30 +34,18 @@ export default function HomeNavbar() {
         window.addEventListener("scroll", onScroll);
         window.addEventListener("hashchange", onHashChange);
 
-        const onDocClick = (e: MouseEvent) => {
-            const target = e.target as HTMLElement | null;
-            if (!target) return;
-
-            const toggle = document.getElementById("menu-toggle");
-            const menu = document.getElementById("mobile-menu");
-            if (!toggle || !menu) return;
-
-            if (!menu.contains(target) && !toggle.contains(target)) {
-                setMobileOpen(false);
-            }
-        };
-
-        document.addEventListener("click", onDocClick);
-
         return () => {
             window.removeEventListener("scroll", onScroll);
             window.removeEventListener("hashchange", onHashChange);
-            document.removeEventListener("click", onDocClick);
         };
     }, []);
 
+    const closeMobileMenu = () => {
+        setMobileOpen(false);
+    };
+
     const navBase =
-        "fixed top-0 left-0 right-0 z-50 h-14 transition-all duration-300";
+        "fixed top-0 left-0 right-0 z-40 h-14 transition-all duration-300";
     const navTop = "bg-black/30 backdrop-blur-sm";
     const navScrolled =
         "bg-black/80 backdrop-blur-md shadow-lg border-b border-white/10";
@@ -78,6 +66,7 @@ export default function HomeNavbar() {
                         href="#home"
                         className="group inline-flex items-center gap-2 text-white"
                         aria-label="Zur Startseite"
+                        onClick={closeMobileMenu}
                     >
                         <img
                             src="/img/asap-logo.png"
@@ -128,58 +117,83 @@ export default function HomeNavbar() {
                         {/* Mobile menu toggle */}
                         <button
                             id="menu-toggle"
-                            className="md:hidden inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 p-2 hover:bg-white/10 transition"
+                            className="md:hidden text-xs font-semibold uppercase tracking-[0.25em] text-[#d4af37] transition hover:text-white"
                             onClick={(e) => {
                                 e.stopPropagation();
                                 setMobileOpen((v) => !v);
                             }}
-                            aria-label="Menü öffnen"
+                            aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
                             aria-expanded={mobileOpen}
                             aria-controls="mobile-menu"
                             type="button"
                         >
-                            <svg
-                                className="h-6 w-6 stroke-[#d4af37]"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                strokeWidth={2}
-                                strokeLinecap="round"
-                            >
-                                <path d="M4 6h16M4 12h16M4 18h16" />
-                            </svg>
+                            {mobileOpen ? "Close" : "Menu"}
                         </button>
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
+
+            </nav>
+
+            {/* Mobile Menu */}
+            {mobileOpen && (
                 <div
                     id="mobile-menu"
-                    className={[
-                        "md:hidden overflow-hidden transition-all duration-300 origin-top",
-                        mobileOpen ? "block" : "hidden",
-                    ].join(" ")}
+                    className="fixed left-0 right-0 top-0 z-50 mx-auto h-dvh w-full max-w-6xl overflow-hidden bg-black text-white md:hidden"
                 >
-                    <div className="mx-auto max-w-6xl px-4 pb-6">
-                        <div className="mt-3 rounded-2xl border border-white/10 bg-black/90 backdrop-blur-md shadow-xl">
-                            <div className="h-[2px] bg-[#d4af37] rounded-t-2xl" />
+                    <div className="flex h-14 items-center justify-between px-4 md:px-6">
+                        <a
+                            href="#home"
+                            className="group inline-flex items-center gap-2 text-white"
+                            aria-label="Zur Startseite"
+                            onClick={closeMobileMenu}
+                        >
+                            <img
+                                src="/img/asap-logo.png"
+                                alt="A$AP Logo"
+                                className="h-6 w-auto opacity-95 transition group-hover:opacity-100"
+                            />
+                            <span className="text-sm font-semibold uppercase tracking-wider">
+                                ALWAYS<span className="text-[#d4af37]">STRIVE</span>ANDPROSPER
+                            </span>
+                        </a>
 
-                            <ul className="flex flex-col py-3 text-center text-base font-medium tracking-wide text-white">
-                                {NAV_ITEMS.map((item) => (
+                        <button
+                            type="button"
+                            onClick={closeMobileMenu}
+                            className="text-2xl leading-none text-[#d4af37] transition hover:text-white"
+                            aria-label="Navigation schließen"
+                        >
+                            ✕
+                        </button>
+                    </div>
+
+                    <div className="mx-4 mt-10 h-[2px] bg-[#d4af37]" />
+
+                    <nav aria-label="Mobile Navigation" className="mt-16 px-4">
+                        <ul className="flex flex-col gap-7">
+                            {NAV_ITEMS.map((item) => {
+                                const isActive = activeHash === item.href;
+
+                                return (
                                     <li key={item.href}>
                                         <a
                                             href={item.href}
-                                            className="block py-3 hover:text-[#d4af37] transition border-b border-white/10"
-                                            onClick={() => setMobileOpen(false)}
+                                            onClick={closeMobileMenu}
+                                            className={[
+                                                "block border-b border-white/10 pb-5 text-4xl font-semibold uppercase tracking-tight transition",
+                                                isActive ? "text-[#d4af37]" : "text-white hover:text-[#d4af37]",
+                                            ].join(" ")}
                                         >
                                             {item.label}
                                         </a>
                                     </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
+                                );
+                            })}
+                        </ul>
+                    </nav>
                 </div>
-            </nav>
+            )}
 
             {/* Spacer for fixed navbar */}
             <div className="h-14" aria-hidden="true" />

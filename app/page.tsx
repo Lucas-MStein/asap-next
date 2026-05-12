@@ -128,7 +128,7 @@ export default function HomePage() {
             </section>
 
             {/* Kontakt */}
-            <section id="kontakt" className="py-28 bg-gray-50 text-black px-4 md:px-20">
+            <section id="contact" className="py-28 bg-gray-50 text-black px-4 md:px-20">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
                         Kontakt
