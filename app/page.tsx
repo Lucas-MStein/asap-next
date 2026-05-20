@@ -22,60 +22,60 @@ export default function HomePage() {
                         Always Strive And Prosper
                     </h1>
                     <p className="mt-4 text-lg font-bebas md:text-2xl">
-                        A digital space inspired by the world&apos;s leading creative minds
+                        A personal archive for culture, sound, style and thought.
                     </p>
                     <a
                         href="#blog"
                         className="mt-6 px-6 py-3 bg-[#d4af37] text-white font-semibold rounded-full shadow-md hover:brightness-110 transition duration-300"
                     >
-                        Explore Blog
+                        Enter Archive
                     </a>
                 </div>
             </section>
 
-            {/* Blog */}
+            {/* Notes / Archive */}
             <section id="blog" className="py-28 bg-gray-50 text-black px-4 md:px-20">
                 <div className="max-w-6xl mx-auto">
                     <div className="max-w-4xl mx-auto text-center mb-12">
                         <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                            Beiträge
+                            Latest Notes
                         </h2>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
                             <div>
-                                <h3 className="text-xl font-bold mb-2">Initial Commit</h3>
+                                <h3 className="text-xl font-bold mb-2">Origin Note</h3>
                                 <p className="text-sm text-gray-600">
-                                    Projektstart: Motivation, Vision &amp; Zielsetzung.
+                                    Der erste Eintrag: Herkunft, Idee und Richtung des Archives.
                                 </p>
                             </div>
                             <a href="/initial" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                Weiterlesen →
+                                Read Note →
                             </a>
                         </article>
 
                         <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
                             <div>
-                                <h3 className="text-xl font-bold mb-2">Daily Commits</h3>
+                                <h3 className="text-xl font-bold mb-2">Field Notes</h3>
                                 <p className="text-sm text-gray-600">
-                                    Tägliche Logs zur Entwicklung, Entscheidungen &amp; Learnings.
+                                    Fragmente, Beobachtungen und kleine Gedanken aus dem laufenden Prozess.
                                 </p>
                             </div>
                             <a href="/daily" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                Zu den Logs →
+                                View Notes →
                             </a>
                         </article>
 
                         <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
                             <div>
-                                <h3 className="text-xl font-bold mb-2">Downloads</h3>
+                                <h3 className="text-xl font-bold mb-2">Archive</h3>
                                 <p className="text-sm text-gray-600">
-                                    Alle PDFs: Musik, Kunst &amp; Persönlichkeiten
+                                    Kuratierte PDFs, Referenzen und Sammlungen aus Sound, Culture und Style.
                                 </p>
                             </div>
                             <a href="/downloads" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                PDFs anzeigen →
+                                Open Archive →
                             </a>
                         </article>
                     </div>
@@ -87,7 +87,7 @@ export default function HomePage() {
                 <div className="max-w-6xl mx-auto">
                     <div className="text-center mb-12">
                         <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                            Über mich
+                            About the Archive
                         </h2>
                     </div>
 
@@ -112,35 +112,31 @@ export default function HomePage() {
                         {/* Text */}
                         <div>
                             <p className="text-lg leading-relaxed">
-                                Ich bin <span className="font-semibold">Lucas-Maurice Stein</span>,
-                                kreativer Kopf und Musikliebhaber. Dieser Blog ist mein digitaler
-                                Ausdruck von <span className="italic">Street Culture</span>, Kunst und
-                                Style – inspiriert von <strong>A$AP Rocky</strong> und der Idee, immer
-                                zu wachsen:{" "}
-                                <span className="text-[#d4af37] font-semibold">
-            Always Strive And Prosper
-          </span>
-                                .
+                                Ich bin <span className="font-semibold">Lucas-Maurice Stein</span>.
+                                <span className="text-[#d4af37] font-semibold"> Always Strive And Prosper</span>{" "}
+                                ist mein persönliches Archiv für Kultur, Sound, Stil und Gedanken —
+                                eine Sammlung aus Referenzen, Notizen und Fragmenten, die meinen Blick
+                                auf Musik, Design, Street Culture und digitale Ästhetik prägen.
                             </p>
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* Kontakt */}
+            {/* Contact */}
             <section id="contact" className="py-28 bg-gray-50 text-black px-4 md:px-20">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                        Kontakt
+                        Contact
                     </h2>
                     <p className="text-lg mb-6 mt-6">
-                        Fragen, Anregungen oder einfach nur „Peace“ sagen?
+                        Für Austausch, Ideen oder ausgewählte Kollaborationen.
                     </p>
                     <a
                         href="mailto:lucasmauricestein@gmail.com"
                         className="inline-flex items-center gap-3 px-6 py-3 bg-[#d4af37] text-white font-medium rounded-full shadow-md hover:brightness-110 transition duration-300"
                     >
-                        Schreib mir eine E-Mail
+                        Send a Message
                     </a>
                 </div>
             </section>

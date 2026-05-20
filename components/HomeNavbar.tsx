@@ -9,9 +9,9 @@ type NavItem = {
 
 const NAV_ITEMS: NavItem[] = [
     { href: "#home", label: "Home" },
-    { href: "#blog", label: "Blog" },
-    { href: "#about", label: "Über" },
-    { href: "#contact", label: "Kontakt" },
+    { href: "#blog", label: "Notes" },
+    { href: "#about", label: "About" },
+    { href: "#contact", label: "Contact" },
 ];
 
 export default function HomeNavbar() {
@@ -65,7 +65,7 @@ export default function HomeNavbar() {
                     <a
                         href="#home"
                         className="group inline-flex items-center gap-2 text-white"
-                        aria-label="Zur Startseite"
+                        aria-label="Back to home"
                         onClick={closeMobileMenu}
                     >
                         <img
@@ -122,7 +122,7 @@ export default function HomeNavbar() {
                                 e.stopPropagation();
                                 setMobileOpen((v) => !v);
                             }}
-                            aria-label={mobileOpen ? "Menü schließen" : "Menü öffnen"}
+                            aria-label={mobileOpen ? "Close menu" : "Open menu"}
                             aria-expanded={mobileOpen}
                             aria-controls="mobile-menu"
                             type="button"
@@ -145,7 +145,7 @@ export default function HomeNavbar() {
                         <a
                             href="#home"
                             className="group inline-flex items-center gap-2 text-white"
-                            aria-label="Zur Startseite"
+                            aria-label="Back to home"
                             onClick={closeMobileMenu}
                         >
                             <img
@@ -162,7 +162,7 @@ export default function HomeNavbar() {
                             type="button"
                             onClick={closeMobileMenu}
                             className="text-2xl leading-none text-[#d4af37] transition hover:text-white"
-                            aria-label="Navigation schließen"
+                            aria-label="Close navigation"
                         >
                             ✕
                         </button>
@@ -192,6 +192,10 @@ export default function HomeNavbar() {
                             })}
                         </ul>
                     </nav>
+
+                    <p className="absolute bottom-8 left-4 right-4 text-xs uppercase tracking-[0.25em] text-neutral-500">
+                        A personal archive for culture, sound, style and thought.
+                    </p>
                 </div>
             )}
 

@@ -1,0 +1,44 @@
+{
+  "title": "Field Notes",
+  "subtitle": "Weekly fragments from culture, sound, style and thought.",
+  "description": "Collected references, observations and unfinished ideas from the archive.",
+  "startedAt": "2025-06-17",
+  "categories": ["Culture", "Sound", "Style", "Thought"],
+  "weeks": [
+    {
+      "week": 1,
+      "title": "First Signals",
+      "summary": "A few fragments collected during the first week of the archive.",
+      "items": [
+        {
+          "category": "Culture",
+          "title": "Street culture as visual memory",
+          "text": "A short thought about how references, scenes and repeated symbols shape personal taste.",
+          "reference": "Always Strive And Prosper",
+          "status": "draft"
+        },
+        {
+          "category": "Sound",
+          "title": "Music as atmosphere",
+          "text": "How a sound can define the mood of a day before it becomes a finished idea.",
+          "reference": "A$AP Rocky",
+          "status": "draft"
+        },
+        {
+          "category": "Style",
+          "title": "Black, gold and contrast",
+          "text": "A visual direction that feels minimal, sharp and connected to the archive identity.",
+          "reference": "ASAP visual system",
+          "status": "draft"
+        },
+        {
+          "category": "Thought",
+          "title": "Collect before judging",
+          "text": "Not every note needs to become a lesson. Some fragments are worth keeping unfinished.",
+          "reference": null,
+          "status": "draft"
+        }
+      ]
+    }
+  ]
+}

@@ -20,7 +20,7 @@ const downloads: DownloadItem[] = [
 export default function DownloadsPage() {
     return (
         <div className="min-h-screen flex flex-col bg-neutral-950 text-white">
-            <BackHeader href="/#blog" label="Zurück zu Beiträge" />
+            <BackHeader href="/#blog" label="Back to Notes" />
 
             {/* HERO */}
             <section className="relative overflow-hidden">
@@ -36,25 +36,26 @@ export default function DownloadsPage() {
                 <div className="relative mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-18">
                     <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
                         <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                        Ressourcen
+                        Archive
                     </p>
 
                     <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
-                        Downloads
+                        Archive
                         <span className="block mt-3 h-1 w-20 bg-[#d4af37]" />
                     </h1>
 
                     <p className="mt-6 max-w-3xl text-white/80 text-lg leading-relaxed">
-                        Hier findest du alle relevanten Dokumente zum Projekt{" "}
+                        Kuratierte PDFs, Referenzen und Sammlungen aus dem Umfeld von{" "}
                         <span className="text-[#d4af37] font-semibold">
               Always Strive And Prosper
             </span>{" "}
-                        – als PDFs zum Download.
+                        — gesammelt als Teil eines persönlichen Archives für Culture, Sound,
+                        Style und Thought.
                     </p>
 
                     {/* quick chips */}
                     <div className="mt-8 flex flex-wrap gap-3">
-                        {["PDFs", "Notes", "Work in Progress"].map((label) => (
+                        {["References", "PDFs", "Work in Progress"].map((label) => (
                             <span
                                 key={label}
                                 className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/85 hover:bg-white/10 transition"
@@ -78,17 +79,17 @@ export default function DownloadsPage() {
                             <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
                                 <div>
                                     <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-                                        Dokumente
+                                        Selected References
                                         <span className="ml-3 align-middle inline-block h-1 w-10 bg-[#d4af37]" />
                                     </h2>
                                     <p className="mt-2 text-neutral-600">
-                                        Alle Dateien werden direkt aus dem <span className="font-medium">/public/downloads</span>-Ordner ausgeliefert.
+                                        Eine kleine Sammlung aus PDFs, Skizzen und Materialien, die das Archiv ergänzen.
                                     </p>
                                 </div>
 
                                 <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700">
                   <span className="h-2 w-2 rounded-full bg-[#d4af37]" />
-                                    {downloads.length} Datei{downloads.length === 1 ? "" : "en"}
+                                    {downloads.length} Reference{downloads.length === 1 ? "" : "s"}
                 </span>
                             </div>
 
@@ -137,11 +138,11 @@ function DownloadRow({ item }: { item: DownloadItem }) {
                         </div>
 
                         <p className="mt-1 text-sm text-neutral-600">
-                            {item.note ?? "Zum Download verfügbar."}
+                            {item.note ?? "Als Referenz im Archiv verfügbar."}
                         </p>
 
                         <p className="mt-2 text-xs text-neutral-500">
-                            Datei: <span className="font-mono">{item.href}</span>
+                            Source: <span className="font-mono">{item.href}</span>
                         </p>
                     </div>
                 </div>
@@ -151,7 +152,7 @@ function DownloadRow({ item }: { item: DownloadItem }) {
                     download
                     className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-semibold shadow-md hover:bg-neutral-900 transition"
                 >
-                    Download →
+                    Open PDF →
                 </a>
             </div>
         </div>
