@@ -1,6 +1,43 @@
+import Image from "next/image";
 import HomeNavbar from "@/components/HomeNavbar";
 import SiteFooter from "@/components/SiteFooter";
-import Image from "next/image";
+import Container from "@/components/Container";
+import Eyebrow from "@/components/Eyebrow";
+
+type ArchiveEntry = {
+    index: string;
+    title: string;
+    description: string;
+    href: string;
+    cta: string;
+};
+
+const ARCHIVE_ENTRIES: ArchiveEntry[] = [
+    {
+        index: "01",
+        title: "Origin Note",
+        description:
+            "The first entry — where the archive comes from and what it tries to hold.",
+        href: "/initial",
+        cta: "Read note",
+    },
+    {
+        index: "02",
+        title: "Field Notes",
+        description:
+            "Weekly fragments from culture, sound, style and thought. Unfinished on purpose.",
+        href: "/daily",
+        cta: "View notes",
+    },
+    {
+        index: "03",
+        title: "Archive",
+        description:
+            "Selected references, PDFs and collected material from the surrounding world.",
+        href: "/downloads",
+        cta: "Open archive",
+    },
+];
 
 export default function HomePage() {
     return (
@@ -8,137 +45,164 @@ export default function HomePage() {
             <HomeNavbar />
 
             {/* Hero */}
-            <section id="home" className="relative w-full h-screen bg-black">
-                <Image
-                    src="/img/rocky.jpg"
-                    alt="ASAP Rocky"
-                    fill
-                    priority
-                    sizes="100vw"
-                    className="object-cover opacity-80"
-                />
-                <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white px-4">
-                    <h1 className="text-5xl md:text-7xl font-bebas uppercase tracking-wide italic">
-                        Always Strive And Prosper
+            <section
+                id="home"
+                className="relative border-b border-ink/10"
+            >
+                <Container className="py-24 md:py-40">
+                    <Eyebrow>The Archive · Est. 2025</Eyebrow>
+
+                    <h1 className="mt-10 text-5xl md:text-7xl lg:text-[5.5rem] font-medium tracking-tight leading-[1.02]">
+                        Always Strive
+                        <br />
+                        And Prosper.
                     </h1>
-                    <p className="mt-4 text-lg font-bebas md:text-2xl">
-                        A personal archive for culture, sound, style and thought.
+
+                    <span
+                        className="mt-10 block h-px w-16 bg-gold"
+                        aria-hidden="true"
+                    />
+
+                    <p className="mt-10 max-w-2xl text-lg md:text-2xl leading-relaxed text-neutral-600">
+                        A personal archive for culture, sound, style and thought —
+                        collected references, observations and unfinished ideas.
                     </p>
-                    <a
-                        href="#blog"
-                        className="mt-6 px-6 py-3 bg-[#d4af37] text-white font-semibold rounded-full shadow-md hover:brightness-110 transition duration-300"
-                    >
-                        Enter Archive
-                    </a>
-                </div>
+
+                    <div className="mt-12 flex flex-wrap items-center gap-x-8 gap-y-4 text-[11px] uppercase tracking-[0.28em]">
+                        <a
+                            href="#notes"
+                            className="group inline-flex items-center gap-3 text-ink"
+                        >
+                            <span className="inline-block h-px w-8 bg-ink transition group-hover:w-12 group-hover:bg-gold" />
+                            Enter Archive
+                        </a>
+                        <a
+                            href="#about"
+                            className="text-neutral-500 transition hover:text-ink"
+                        >
+                            About the archive
+                        </a>
+                    </div>
+                </Container>
             </section>
 
-            {/* Notes / Archive */}
-            <section id="blog" className="py-28 bg-gray-50 text-black px-4 md:px-20">
-                <div className="max-w-6xl mx-auto">
-                    <div className="max-w-4xl mx-auto text-center mb-12">
-                        <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                            Latest Notes
-                        </h2>
+            {/* Notes / Archive Index */}
+            <section id="notes" className="border-b border-ink/10">
+                <Container className="py-24 md:py-36">
+                    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                        <div>
+                            <Eyebrow>Index</Eyebrow>
+                            <h2 className="mt-6 text-3xl md:text-5xl font-medium tracking-tight">
+                                Latest Notes
+                            </h2>
+                        </div>
+                        <p className="max-w-sm text-sm leading-relaxed text-neutral-500">
+                            Three entry points into the archive — each grows on its own
+                            rhythm.
+                        </p>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                        <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-xl font-bold mb-2">Origin Note</h3>
-                                <p className="text-sm text-gray-600">
-                                    Der erste Eintrag: Herkunft, Idee und Richtung des Archives.
-                                </p>
-                            </div>
-                            <a href="/initial" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                Read Note →
-                            </a>
-                        </article>
+                    <span
+                        className="mt-12 block h-px w-12 bg-gold"
+                        aria-hidden="true"
+                    />
 
-                        <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-xl font-bold mb-2">Field Notes</h3>
-                                <p className="text-sm text-gray-600">
-                                    Fragmente, Beobachtungen und kleine Gedanken aus dem laufenden Prozess.
-                                </p>
-                            </div>
-                            <a href="/daily" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                View Notes →
-                            </a>
-                        </article>
+                    <ul className="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+                        {ARCHIVE_ENTRIES.map((entry) => (
+                            <li key={entry.index}>
+                                <a
+                                    href={entry.href}
+                                    className="group grid grid-cols-[3rem_1fr] gap-6 py-8 md:grid-cols-[4rem_1fr_auto] md:items-baseline md:gap-10 md:py-10"
+                                >
+                                    <span className="text-[11px] uppercase tracking-[0.28em] text-neutral-500 md:pt-1">
+                                        {entry.index}
+                                    </span>
 
-                        <article className="bg-white rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 p-6 flex flex-col justify-between">
-                            <div>
-                                <h3 className="text-xl font-bold mb-2">Archive</h3>
-                                <p className="text-sm text-gray-600">
-                                    Kuratierte PDFs, Referenzen und Sammlungen aus Sound, Culture und Style.
-                                </p>
-                            </div>
-                            <a href="/downloads" className="mt-4 inline-block text-[#d4af37] font-semibold hover:underline">
-                                Open Archive →
-                            </a>
-                        </article>
-                    </div>
-                </div>
+                                    <div className="col-span-1 md:col-span-1">
+                                        <h3 className="text-2xl md:text-4xl font-medium tracking-tight transition group-hover:text-neutral-500">
+                                            {entry.title}
+                                        </h3>
+                                        <p className="mt-3 max-w-md text-sm md:text-base leading-relaxed text-neutral-500">
+                                            {entry.description}
+                                        </p>
+                                    </div>
+
+                                    <span className="col-start-2 mt-4 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-ink md:col-auto md:mt-0">
+                                        <span className="inline-block h-px w-6 bg-ink transition group-hover:w-10 group-hover:bg-gold" />
+                                        {entry.cta}
+                                    </span>
+                                </a>
+                            </li>
+                        ))}
+                    </ul>
+                </Container>
             </section>
 
             {/* About */}
-            <section id="about" className="py-28 bg-gray-100 text-black px-4 md:px-20">
-                <div className="max-w-6xl mx-auto">
-                    <div className="text-center mb-12">
-                        <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                            About the Archive
-                        </h2>
-                    </div>
-
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
-                        {/* Bild */}
-                        <div className="relative w-full max-w-md mx-auto">
-                            <div className="rounded-2xl overflow-hidden shadow-2xl border border-black/10">
+            <section id="about" className="border-b border-ink/10 bg-ink text-paper">
+                <Container className="py-24 md:py-36">
+                    <div className="grid gap-16 md:grid-cols-[1fr_1.2fr] md:gap-20 md:items-start">
+                        <div>
+                            <div className="relative aspect-[4/5] w-full max-w-sm overflow-hidden border border-paper/15">
                                 <Image
                                     src="/img/me.webp"
-                                    alt="Foto von Lucas-Maurice Stein"
-                                    width={900}
-                                    height={1100}
-                                    className="w-full h-auto object-cover"
-                                    priority={false}
+                                    alt="Lucas-Maurice Stein"
+                                    fill
+                                    sizes="(max-width: 768px) 80vw, 32rem"
+                                    className="object-cover grayscale"
                                 />
                             </div>
-
-                            {/* goldener Akzent */}
-                            <div className="absolute -bottom-3 -right-3 h-16 w-16 rounded-2xl bg-[#d4af37] shadow-lg" />
                         </div>
 
-                        {/* Text */}
                         <div>
-                            <p className="text-lg leading-relaxed">
-                                Ich bin <span className="font-semibold">Lucas-Maurice Stein</span>.
-                                <span className="text-[#d4af37] font-semibold"> Always Strive And Prosper</span>{" "}
-                                ist mein persönliches Archiv für Kultur, Sound, Stil und Gedanken —
-                                eine Sammlung aus Referenzen, Notizen und Fragmenten, die meinen Blick
-                                auf Musik, Design, Street Culture und digitale Ästhetik prägen.
-                            </p>
+                            <Eyebrow tone="paper">About the Archive</Eyebrow>
+
+                            <h2 className="mt-6 text-3xl md:text-5xl font-medium tracking-tight leading-[1.1]">
+                                Not a blog.
+                                <br />
+                                A personal archive.
+                            </h2>
+
+                            <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
+
+                            <div className="mt-10 space-y-6 text-lg leading-relaxed text-paper/80">
+                                <p>
+                                    <span className="text-paper">Always Strive And Prosper</span>{" "}
+                                    is the working title for a slow-burning collection — references,
+                                    fragments and observations from music, street culture, design
+                                    and digital aesthetics.
+                                </p>
+                                <p>
+                                    Curated by{" "}
+                                    <span className="text-paper">Lucas-Maurice Stein</span>.
+                                    Nothing here aims to teach. It only tries to remember.
+                                </p>
+                            </div>
                         </div>
                     </div>
-                </div>
+                </Container>
             </section>
 
             {/* Contact */}
-            <section id="contact" className="py-28 bg-gray-50 text-black px-4 md:px-20">
-                <div className="max-w-4xl mx-auto text-center">
-                    <h2 className="text-4xl font-extrabold tracking-tight relative inline-block after:block after:w-16 after:h-1 after:bg-[#d4af37] after:mx-auto after:mt-2">
-                        Contact
+            <section id="contact">
+                <Container className="py-24 md:py-36">
+                    <Eyebrow>Contact</Eyebrow>
+
+                    <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl font-medium tracking-tight leading-[1.1]">
+                        For exchanges, ideas
+                        <br className="hidden md:block" /> and quiet collaborations.
                     </h2>
-                    <p className="text-lg mb-6 mt-6">
-                        Für Austausch, Ideen oder ausgewählte Kollaborationen.
-                    </p>
+
+                    <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
+
                     <a
                         href="mailto:lucasmauricestein@gmail.com"
-                        className="inline-flex items-center gap-3 px-6 py-3 bg-[#d4af37] text-white font-medium rounded-full shadow-md hover:brightness-110 transition duration-300"
+                        className="group mt-12 inline-flex items-center gap-4 text-lg md:text-xl text-ink"
                     >
-                        Send a Message
+                        <span className="inline-block h-px w-10 bg-ink transition group-hover:w-16 group-hover:bg-gold" />
+                        lucasmauricestein@gmail.com
                     </a>
-                </div>
+                </Container>
             </section>
 
             <SiteFooter showLegalLinks />

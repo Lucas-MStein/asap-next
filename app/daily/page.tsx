@@ -1,8 +1,8 @@
-"use client";
-
-import { useMemo, useState } from "react";
 import BackHeader from "@/components/BackHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Container from "@/components/Container";
+import Eyebrow from "@/components/Eyebrow";
+import PageHeader from "@/components/PageHeader";
 
 import data from "./field-notes-data.json";
 
@@ -25,194 +25,150 @@ type WeekBlock = {
 };
 
 export default function DailyPage() {
-    const weeks = data.weeks as WeekBlock[];
-
-    const weekNumbers = useMemo(
-        () => weeks.map((w) => w.week).sort((a, b) => a - b),
-        [weeks]
-    );
-
-    const [activeWeek, setActiveWeek] = useState<number>(weekNumbers[0] ?? 1);
-
-    const activeWeekBlock = useMemo(() => {
-        return weeks.find((w) => w.week === activeWeek) ?? weeks[0];
-    }, [weeks, activeWeek]);
-
-    const categories = data.categories as FieldNoteCategory[];
+    const weeks = (data.weeks as WeekBlock[])
+        .slice()
+        .sort((a, b) => a.week - b.week);
 
     return (
-        <div className="min-h-screen flex flex-col bg-neutral-950 text-white">
-            <BackHeader href="/#blog" label="Back to Notes" />
+        <>
+            <BackHeader href="/#notes" label="Back to Index" />
 
-            {/* HERO */}
-            <section className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-neutral-950" />
+            <PageHeader
+                eyebrow="Field Notes · 02"
+                title={data.title}
+                lede={`${data.subtitle} ${data.description}`}
+                meta={`Started ${data.startedAt}`}
+            />
 
-                {/* gold bars */}
-                <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#d4af37]/70" />
-                <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#d4af37]/40" />
+            <main className="bg-paper">
+                {/* Week index */}
+                {weeks.length > 1 && (
+                    <section className="border-b border-ink/10">
+                        <Container className="py-10 md:py-12">
+                            <Eyebrow>Index</Eyebrow>
+                            <ul className="mt-6 flex flex-wrap gap-x-8 gap-y-3 text-[13px] uppercase tracking-[0.22em]">
+                                {weeks.map((w) => (
+                                    <li key={w.week}>
+                                        <a
+                                            href={`#week-${w.week}`}
+                                            className="group inline-flex items-center gap-2 text-neutral-500 hover:text-ink"
+                                        >
+                                            <span className="text-neutral-400">
+                                                W{String(w.week).padStart(2, "0")}
+                                            </span>
+                                            <span>{w.title}</span>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </Container>
+                    </section>
+                )}
 
-                {/* glow */}
-                <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
+                {/* Weeks */}
+                {weeks.map((week, idx) => (
+                    <section
+                        key={week.week}
+                        id={`week-${week.week}`}
+                        className={
+                            idx < weeks.length - 1
+                                ? "border-b border-ink/10 scroll-mt-20"
+                                : "scroll-mt-20"
+                        }
+                    >
+                        <Container className="py-20 md:py-28">
+                            <div className="grid gap-10 md:grid-cols-[12rem_1fr] md:gap-16">
+                                <div className="md:sticky md:top-24 md:self-start">
+                                    <Eyebrow>
+                                        Week {String(week.week).padStart(2, "0")}
+                                    </Eyebrow>
+                                    <h2 className="mt-6 text-3xl md:text-4xl font-medium tracking-tight leading-[1.1]">
+                                        {week.title}
+                                    </h2>
+                                    <span
+                                        className="mt-6 block h-px w-10 bg-gold"
+                                        aria-hidden="true"
+                                    />
+                                    <p className="mt-6 text-base leading-relaxed text-neutral-500">
+                                        {week.summary}
+                                    </p>
+                                </div>
 
-                <div className="relative mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-18">
-                    <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                        Field Notes
-                    </p>
+                                <div>
+                                    {week.items.length === 0 ? (
+                                        <p className="text-base leading-relaxed text-neutral-500">
+                                            No field notes for this week yet.
+                                        </p>
+                                    ) : (
+                                        <ul className="divide-y divide-ink/10 border-y border-ink/10">
+                                            {week.items.map((item, i) => (
+                                                <li key={`${week.week}-${i}`}>
+                                                    <FieldNoteRow item={item} />
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    )}
+                                </div>
+                            </div>
+                        </Container>
+                    </section>
+                ))}
 
-                    <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
-                        {data.title}
-                        <span className="block mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </h1>
-
-                    <p className="mt-6 max-w-3xl text-white/80 text-lg leading-relaxed">
-                        {data.subtitle} {data.description}
-                    </p>
-
-                    <p className="mt-4 max-w-3xl text-white/60 text-sm uppercase tracking-[0.2em]">
-                        Started {data.startedAt}
-                    </p>
-
-                    {/* Week switch */}
-                    <div className="mt-10 flex flex-wrap gap-3">
-                        {weekNumbers.map((w) => {
-                            const active = w === activeWeek;
-                            return (
-                                <button
-                                    key={w}
-                                    type="button"
-                                    onClick={() => setActiveWeek(w)}
-                                    className={[
-                                        "px-5 py-2.5 rounded-full border transition font-medium",
-                                        active
-                                            ? "bg-[#d4af37] text-black border-[#d4af37]"
-                                            : "bg-white/5 text-white border-white/10 hover:bg-white/10 hover:border-white/20",
-                                    ].join(" ")}
-                                >
-                                    Week {w}
-                                </button>
-                            );
-                        })}
-                    </div>
-
-                    {/* Category chips */}
-                    <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        {categories.map((category) => (
-                            <div
-                                key={category}
-                                className="rounded-2xl border border-white/10 bg-white/5 p-5 shadow-sm"
+                {/* Continue */}
+                <section className="border-t border-ink/10">
+                    <Container className="py-20 md:py-28">
+                        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+                            <div>
+                                <Eyebrow>Next · 03</Eyebrow>
+                                <h3 className="mt-6 text-3xl md:text-4xl font-medium tracking-tight">
+                                    Open the Archive
+                                </h3>
+                                <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-500">
+                                    Selected references, PDFs and material from the surrounding
+                                    world.
+                                </p>
+                            </div>
+                            <a
+                                href="/downloads"
+                                className="group inline-flex items-center gap-3 self-start text-[11px] uppercase tracking-[0.28em] text-ink md:self-auto"
                             >
-                                <p className="text-xs uppercase tracking-[0.25em] text-white/60">
-                                    {category}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* CONTENT */}
-            <main className="flex-1 bg-neutral-50 text-neutral-900">
-                <div className="mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-20">
-                    {/* Week Card */}
-                    <section className="rounded-2xl bg-white shadow-xl border border-neutral-200 overflow-hidden">
-                        <div className="h-2 bg-gradient-to-r from-black via-neutral-900 to-[#d4af37]" />
-
-                        <div className="p-6 md:p-10">
-                            <div className="max-w-3xl">
-                                <p className="text-xs uppercase tracking-[0.25em] text-neutral-500">
-                                    Week {activeWeekBlock.week}
-                                </p>
-
-                                <h2 className="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight">
-                                    {activeWeekBlock.title}
-                                    <span className="block mt-3 h-1 w-16 bg-[#d4af37]" />
-                                </h2>
-
-                                <p className="mt-5 text-neutral-600 text-lg leading-relaxed">
-                                    {activeWeekBlock.summary}
-                                </p>
-                            </div>
-
-                            <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2">
-                                {activeWeekBlock.items.length === 0 ? (
-                                    <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-6 text-neutral-500 md:col-span-2">
-                                        No Field Notes for Week {activeWeekBlock.week} yet.
-                                    </div>
-                                ) : (
-                                    activeWeekBlock.items.map((item, index) => (
-                                        <FieldNoteCard
-                                            key={`${item.category}-${item.title}-${index}`}
-                                            item={item}
-                                        />
-                                    ))
-                                )}
-                            </div>
+                                <span className="inline-block h-px w-8 bg-ink transition group-hover:w-12 group-hover:bg-gold" />
+                                Open Archive
+                            </a>
                         </div>
-
-                        <div className="h-2 bg-gradient-to-r from-[#d4af37] via-neutral-900 to-black" />
-                    </section>
-
-                    {/* Divider */}
-                    <div className="my-10 md:my-14">
-                        <div className="h-px bg-neutral-200" />
-                        <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </div>
-
-                    <section className="mt-10 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-6 md:p-10 shadow-lg">
-                        <div>
-                            <h3 className="text-xl md:text-2xl font-extrabold">
-                                Open the Archive
-                            </h3>
-                            <p className="mt-2 text-neutral-600">
-                                Kuratierte PDFs, Referenzen und Sammlungen findest du im Archiv.
-                            </p>
-                        </div>
-
-                        <a
-                            href="/downloads"
-                            className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-semibold shadow-md hover:bg-neutral-900 transition"
-                        >
-                            Open Archive →
-                        </a>
-                    </section>
-                </div>
+                    </Container>
+                </section>
             </main>
 
             <SiteFooter />
-        </div>
+        </>
     );
 }
 
-/* ---------- UI helpers ---------- */
-
-function FieldNoteCard({ item }: { item: FieldNoteItem }) {
+function FieldNoteRow({ item }: { item: FieldNoteItem }) {
     return (
-        <article className="flex h-full flex-col rounded-2xl border border-neutral-200 bg-neutral-50 p-6 transition hover:-translate-y-0.5 hover:shadow-lg">
-            <div className="flex items-center justify-between gap-3">
-                <span className="inline-flex rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-[#8a6f12]">
-                    {item.category}
-                </span>
-
+        <article className="py-8 md:py-10">
+            <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-[11px] uppercase tracking-[0.28em]">
+                <span className="text-ink">{item.category}</span>
                 {item.status && (
-                    <span className="text-xs uppercase tracking-[0.2em] text-neutral-400">
-                        {item.status}
-                    </span>
+                    <span className="text-neutral-400">{item.status}</span>
                 )}
             </div>
 
-            <h3 className="mt-5 text-xl font-extrabold tracking-tight text-neutral-950">
+            <h3 className="mt-5 text-xl md:text-2xl font-medium tracking-tight leading-snug">
                 {item.title}
             </h3>
 
-            <p className="mt-3 flex-1 text-neutral-600 leading-relaxed">
+            <p className="mt-4 max-w-2xl text-base leading-relaxed text-neutral-600">
                 {item.text}
             </p>
 
             {item.reference && (
-                <p className="mt-6 border-t border-neutral-200 pt-4 text-sm text-neutral-500">
-                    Reference: <span className="font-medium text-neutral-800">{item.reference}</span>
+                <p className="mt-6 text-[11px] uppercase tracking-[0.28em] text-neutral-500">
+                    Reference ·{" "}
+                    <span className="text-neutral-800 normal-case tracking-normal">
+                        {item.reference}
+                    </span>
                 </p>
             )}
         </article>

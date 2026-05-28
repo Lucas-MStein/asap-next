@@ -1,160 +1,134 @@
 import BackHeader from "@/components/BackHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Container from "@/components/Container";
+import Eyebrow from "@/components/Eyebrow";
+import PageHeader from "@/components/PageHeader";
 
-type DownloadItem = {
+type ArchiveItem = {
     title: string;
     href: string;
     note?: string;
     status?: "wip" | "final";
+    format?: string;
 };
 
-const downloads: DownloadItem[] = [
+const ARCHIVE_ITEMS: ArchiveItem[] = [
     {
         title: "Gesicht verlieren",
         href: "/downloads/gesichtverlieren.pdf",
-        note: "work in progress",
+        note: "A short text on faces, presence and the small loss of them.",
         status: "wip",
+        format: "PDF",
     },
 ];
 
 export default function DownloadsPage() {
     return (
-        <div className="min-h-screen flex flex-col bg-neutral-950 text-white">
-            <BackHeader href="/#blog" label="Back to Notes" />
+        <>
+            <BackHeader href="/#notes" label="Back to Index" />
 
-            {/* HERO */}
-            <section className="relative overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-neutral-950" />
+            <PageHeader
+                eyebrow="Archive · 03"
+                title="Archive"
+                lede="Selected references, PDFs and collected material from the surrounding world of Always Strive And Prosper — kept here as part of a personal archive for culture, sound, style and thought."
+            />
 
-                {/* gold bars */}
-                <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#d4af37]/70" />
-                <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#d4af37]/40" />
-
-                {/* glow */}
-                <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
-
-                <div className="relative mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-18">
-                    <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                        Archive
-                    </p>
-
-                    <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
-                        Archive
-                        <span className="block mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </h1>
-
-                    <p className="mt-6 max-w-3xl text-white/80 text-lg leading-relaxed">
-                        Kuratierte PDFs, Referenzen und Sammlungen aus dem Umfeld von{" "}
-                        <span className="text-[#d4af37] font-semibold">
-              Always Strive And Prosper
-            </span>{" "}
-                        — gesammelt als Teil eines persönlichen Archives für Culture, Sound,
-                        Style und Thought.
-                    </p>
-
-                    {/* quick chips */}
-                    <div className="mt-8 flex flex-wrap gap-3">
-                        {["References", "PDFs", "Work in Progress"].map((label) => (
-                            <span
-                                key={label}
-                                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm text-white/85 hover:bg-white/10 transition"
-                            >
-                {label}
-              </span>
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* CONTENT */}
-            <main className="flex-1 bg-neutral-50 text-neutral-900">
-                <div className="mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-20">
-                    {/* Card */}
-                    <section className="rounded-2xl bg-white shadow-xl border border-neutral-200 overflow-hidden">
-                        {/* top accent bar */}
-                        <div className="h-2 bg-gradient-to-r from-black via-neutral-900 to-[#d4af37]" />
-
-                        <div className="p-6 md:p-10">
-                            <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-3">
-                                <div>
-                                    <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-                                        Selected References
-                                        <span className="ml-3 align-middle inline-block h-1 w-10 bg-[#d4af37]" />
-                                    </h2>
-                                    <p className="mt-2 text-neutral-600">
-                                        Eine kleine Sammlung aus PDFs, Skizzen und Materialien, die das Archiv ergänzen.
-                                    </p>
-                                </div>
-
-                                <span className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-neutral-50 px-4 py-2 text-sm text-neutral-700">
-                  <span className="h-2 w-2 rounded-full bg-[#d4af37]" />
-                                    {downloads.length} Reference{downloads.length === 1 ? "" : "s"}
-                </span>
+            <main className="bg-paper">
+                <section className="border-b border-ink/10">
+                    <Container className="py-20 md:py-28">
+                        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+                            <div>
+                                <Eyebrow>Selected References</Eyebrow>
+                                <h2 className="mt-6 text-3xl md:text-5xl font-medium tracking-tight">
+                                    The Collection
+                                </h2>
                             </div>
-
-                            <div className="mt-8 grid gap-4">
-                                {downloads.map((item) => (
-                                    <DownloadRow key={item.href} item={item} />
-                                ))}
-                            </div>
+                            <p className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
+                                {String(ARCHIVE_ITEMS.length).padStart(2, "0")} ·
+                                Reference{ARCHIVE_ITEMS.length === 1 ? "" : "s"}
+                            </p>
                         </div>
 
-                        {/* bottom accent */}
-                        <div className="h-2 bg-gradient-to-r from-[#d4af37] via-neutral-900 to-black" />
-                    </section>
-                </div>
+                        <span className="mt-10 block h-px w-12 bg-gold" aria-hidden="true" />
+
+                        <ul className="mt-12 divide-y divide-ink/10 border-y border-ink/10">
+                            {ARCHIVE_ITEMS.map((item, i) => (
+                                <li key={item.href}>
+                                    <ArchiveRow item={item} index={i + 1} />
+                                </li>
+                            ))}
+                        </ul>
+                    </Container>
+                </section>
+
+                <section>
+                    <Container className="py-20 md:py-28">
+                        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+                            <div>
+                                <Eyebrow>Back · 01</Eyebrow>
+                                <h3 className="mt-6 text-3xl md:text-4xl font-medium tracking-tight">
+                                    Return to the Origin Note
+                                </h3>
+                                <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-500">
+                                    Re-read where the archive began.
+                                </p>
+                            </div>
+                            <a
+                                href="/initial"
+                                className="group inline-flex items-center gap-3 self-start text-[11px] uppercase tracking-[0.28em] text-ink md:self-auto"
+                            >
+                                <span className="inline-block h-px w-8 bg-ink transition group-hover:w-12 group-hover:bg-gold" />
+                                Read Origin Note
+                            </a>
+                        </div>
+                    </Container>
+                </section>
             </main>
 
             <SiteFooter />
-        </div>
+        </>
     );
 }
 
-function DownloadRow({ item }: { item: DownloadItem }) {
-    const badge =
-        item.status === "final" ? (
-            <span className="rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1 text-xs font-semibold text-emerald-700">
-        FINAL
-      </span>
-        ) : (
-            <span className="rounded-full border border-[#d4af37]/30 bg-[#d4af37]/10 px-3 py-1 text-xs font-semibold text-[#8a6f12]">
-        WIP
-      </span>
-        );
-
+function ArchiveRow({ item, index }: { item: ArchiveItem; index: number }) {
     return (
-        <div className="rounded-2xl border border-neutral-200 bg-neutral-50 p-5 md:p-6 hover:bg-white transition">
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-                <div className="flex items-start gap-4">
-                    <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-black text-white">
-                        <span className="text-sm font-bold">PDF</span>
-                    </div>
+        <a
+            href={item.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group grid grid-cols-[2.5rem_1fr] gap-6 py-8 md:grid-cols-[3rem_1fr_auto] md:items-baseline md:gap-10 md:py-10"
+        >
+            <span className="text-[11px] uppercase tracking-[0.28em] text-neutral-500 md:pt-1">
+                {String(index).padStart(2, "0")}
+            </span>
 
-                    <div>
-                        <div className="flex items-center gap-3">
-                            <h3 className="text-lg font-extrabold">{item.title}</h3>
-                            {badge}
-                        </div>
-
-                        <p className="mt-1 text-sm text-neutral-600">
-                            {item.note ?? "Als Referenz im Archiv verfügbar."}
-                        </p>
-
-                        <p className="mt-2 text-xs text-neutral-500">
-                            Source: <span className="font-mono">{item.href}</span>
-                        </p>
-                    </div>
+            <div>
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
+                    <h3 className="text-2xl md:text-3xl font-medium tracking-tight transition group-hover:text-neutral-500">
+                        {item.title}
+                    </h3>
+                    {item.status === "wip" && (
+                        <span className="text-[11px] uppercase tracking-[0.28em] text-gold">
+                            Work in progress
+                        </span>
+                    )}
                 </div>
 
-                <a
-                    href={item.href}
-                    download
-                    className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-semibold shadow-md hover:bg-neutral-900 transition"
-                >
-                    Open PDF →
-                </a>
+                {item.note && (
+                    <p className="mt-3 max-w-xl text-base leading-relaxed text-neutral-500">
+                        {item.note}
+                    </p>
+                )}
+
+                <p className="mt-4 font-mono text-[11px] uppercase tracking-[0.18em] text-neutral-400">
+                    {item.format ?? "FILE"} · Source {item.href}
+                </p>
             </div>
-        </div>
+
+            <span className="col-start-2 mt-4 inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-ink md:col-auto md:mt-0">
+                <span className="inline-block h-px w-6 bg-ink transition group-hover:w-10 group-hover:bg-gold" />
+                Open {item.format ?? "file"}
+            </span>
+        </a>
     );
 }

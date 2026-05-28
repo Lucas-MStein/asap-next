@@ -5,20 +5,19 @@ type BackHeaderProps = {
 
 export default function BackHeader({ href, label }: BackHeaderProps) {
     return (
-        <header className="h-14 flex items-center px-4 md:px-20 bg-black text-white shadow-md sticky top-0 z-50">
-            <a href={href} className="flex items-center text-sm hover:text-[#d4af37] transition">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-5 w-5 mr-2"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                    strokeWidth={2}
+        <header className="sticky top-0 z-30 border-b border-ink/10 bg-paper/85 backdrop-blur supports-[backdrop-filter]:bg-paper/70">
+            <div className="mx-auto flex h-14 w-full max-w-5xl items-center px-6 md:px-10">
+                <a
+                    href={href}
+                    className="group inline-flex items-center gap-3 text-[11px] uppercase tracking-[0.28em] text-neutral-500 transition hover:text-ink"
                 >
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" />
-                </svg>
-                {label}
-            </a>
+                    <span
+                        aria-hidden="true"
+                        className="inline-block h-px w-6 bg-neutral-400 transition group-hover:w-8 group-hover:bg-gold"
+                    />
+                    {label}
+                </a>
+            </div>
         </header>
     );
 }

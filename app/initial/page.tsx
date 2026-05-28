@@ -1,160 +1,140 @@
 import BackHeader from "@/components/BackHeader";
 import SiteFooter from "@/components/SiteFooter";
+import Container from "@/components/Container";
+import Eyebrow from "@/components/Eyebrow";
+import PageHeader from "@/components/PageHeader";
+
+const PRINCIPLES = [
+    {
+        name: "Culture",
+        body: "Scenes, repeated symbols and small movements that shape how taste forms.",
+    },
+    {
+        name: "Sound",
+        body: "Music, artists and the visual language that grows around them.",
+    },
+    {
+        name: "Style",
+        body: "Design, ästhetik and the things worth looking at twice.",
+    },
+    {
+        name: "Thought",
+        body: "Notes, fragments and ideas kept on purpose unfinished.",
+    },
+];
 
 export default function InitialPage() {
     return (
-        <div className="min-h-screen flex flex-col bg-neutral-950 text-white">
-            <BackHeader href="/#blog" label="Back to Notes" />
+        <>
+            <BackHeader href="/#notes" label="Back to Index" />
 
-            {/* HERO */}
-            <section className="relative overflow-hidden">
-                {/* Background */}
-                <div className="absolute inset-0 bg-gradient-to-b from-black via-neutral-950 to-neutral-950" />
+            <PageHeader
+                eyebrow="Origin Note · 01"
+                title="Origin Note"
+                lede="The first entry to Always Strive And Prosper — not a blog, but the opening page of a personal archive for culture, sound, style and thought."
+                meta="Filed 2025"
+            />
 
-                {/* Decorative bars */}
-                <div className="absolute left-0 right-0 top-0 h-[2px] bg-[#d4af37]/70" />
-                <div className="absolute left-0 right-0 bottom-0 h-[2px] bg-[#d4af37]/40" />
+            <main className="bg-paper">
+                {/* Archive Principles */}
+                <section className="border-b border-ink/10">
+                    <Container className="py-20 md:py-28">
+                        <Eyebrow>Archive Principles</Eyebrow>
 
-                {/* Soft glow */}
-                <div className="absolute -top-24 left-1/2 h-72 w-72 -translate-x-1/2 rounded-full bg-[#d4af37]/10 blur-3xl" />
+                        <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl font-medium tracking-tight leading-[1.1]">
+                            Four quiet directions
+                            <br className="hidden md:block" /> the archive follows.
+                        </h2>
 
-                <div className="relative mx-auto max-w-6xl px-4 md:px-20 py-16 md:py-20">
-                    <p className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-white/70">
-                        <span className="h-1.5 w-1.5 rounded-full bg-[#d4af37]" />
-                        Origin Note
-                    </p>
+                        <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
 
-                    <h1 className="mt-4 text-4xl md:text-6xl font-extrabold tracking-tight">
-                        Origin Note
-                        <span className="block mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </h1>
+                        <p className="mt-10 max-w-2xl text-lg leading-relaxed text-neutral-600">
+                            This archive doesn&apos;t follow a guide format. It collects references,
+                            notes and fragments that make taste, curiosity and cultural influence
+                            visible.
+                        </p>
 
-                    <p className="mt-6 max-w-3xl text-white/80 text-lg leading-relaxed">
-                        Der erste Eintrag zu <span className="text-[#d4af37] font-semibold">Always Strive And Prosper</span> —
-                        nicht als klassischer Blog, sondern als persönliches Archiv für Kultur, Sound,
-                        Stil und Gedanken.
-                    </p>
-
-                </div>
-            </section>
-
-            {/* CONTENT */}
-            <main className="flex-1 bg-neutral-50 text-neutral-900">
-                <div className="mx-auto max-w-6xl px-4 md:px-20 py-14 md:py-20">
-                    {/* Card: Archive Principles */}
-                    <section className="relative rounded-2xl bg-white shadow-xl border border-neutral-200 overflow-hidden">
-                        {/* Top accent bar */}
-                        <div className="h-2 bg-gradient-to-r from-black via-neutral-900 to-[#d4af37]" />
-
-                        <div className="p-6 md:p-10">
-                            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight">
-                                Archive Principles
-                                <span className="ml-3 align-middle inline-block h-1 w-10 bg-[#d4af37]" />
-                            </h2>
-
-                            <p className="mt-4 text-neutral-600 leading-relaxed">
-                                Dieses Archiv folgt keinem festen Ratgeber-Format. Es sammelt Referenzen,
-                                Notizen und Fragmente, die Geschmack, Neugier und kulturelle Einflüsse sichtbar machen.
-                            </p>
-
-                            <div className="mt-8 grid grid-cols-1 md:grid-cols-3 gap-4">
-                                <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5">
-                                    <p className="text-xs uppercase tracking-widest text-neutral-500">
-                                        Culture
-                                    </p>
-                                    <p className="mt-2 font-semibold">Popkultur, Szenen und Zeitgeist</p>
+                        <dl className="mt-16 grid grid-cols-1 gap-px overflow-hidden border border-ink/10 bg-ink/10 md:grid-cols-2">
+                            {PRINCIPLES.map((p) => (
+                                <div key={p.name} className="bg-paper p-8 md:p-10">
+                                    <dt className="text-[11px] uppercase tracking-[0.28em] text-neutral-500">
+                                        {p.name}
+                                    </dt>
+                                    <dd className="mt-4 text-xl md:text-2xl font-medium tracking-tight text-ink">
+                                        {p.body}
+                                    </dd>
                                 </div>
+                            ))}
+                        </dl>
+                    </Container>
+                </section>
 
-                                <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5">
-                                    <p className="text-xs uppercase tracking-widest text-neutral-500">
-                                        Sound
-                                    </p>
-                                    <p className="mt-2 font-semibold">Musik, Artists und visuelle Sprache</p>
-                                </div>
+                {/* Why this archive exists — ink section */}
+                <section className="border-b border-ink/10 bg-ink text-paper">
+                    <Container className="py-24 md:py-36">
+                        <Eyebrow tone="paper">Archive Note</Eyebrow>
 
-                                <div className="rounded-xl border border-neutral-200 bg-neutral-50 p-5">
-                                    <p className="text-xs uppercase tracking-widest text-neutral-500">
-                                        Style & Thought
-                                    </p>
-                                    <p className="mt-2 font-semibold">Design, Ästhetik und persönliche Notizen</p>
-                                </div>
+                        <h2 className="mt-6 max-w-3xl text-3xl md:text-5xl font-medium tracking-tight leading-[1.1]">
+                            Why this archive exists.
+                        </h2>
+
+                        <span className="mt-8 block h-px w-12 bg-gold" aria-hidden="true" />
+
+                        <div className="mt-12 grid gap-8 md:grid-cols-2 md:gap-16">
+                            <div className="space-y-6 text-lg leading-relaxed text-paper/80">
+                                <p>
+                                    Always Strive And Prosper started as a personal thought and is
+                                    slowly turning into a place for influences, references and
+                                    quiet observations.
+                                </p>
+                                <p>
+                                    Not every entry needs to give an answer. Some things are
+                                    simply worth keeping.
+                                </p>
                             </div>
-                        </div>
-                    </section>
 
-                    {/* Divider “Balken” wie Startseite */}
-                    <div className="my-10 md:my-14">
-                        <div className="h-px bg-neutral-200" />
-                        <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </div>
-
-                    {/* Motivation: black card */}
-                    <section className="rounded-2xl bg-neutral-950 text-white shadow-2xl border border-white/10 overflow-hidden">
-                        <div className="p-6 md:p-10">
-                            <p className="text-xs uppercase tracking-[0.25em] text-white/60">
-                                Archive Note
-                            </p>
-
-                            <h2 className="mt-3 text-3xl md:text-4xl font-extrabold tracking-tight">
-                                Warum dieses Archiv existiert
-                                <span className="block mt-3 h-1 w-20 bg-[#d4af37]" />
-                            </h2>
-
-                            <p className="mt-8 text-white/80 text-lg leading-relaxed">
-                                Always Strive And Prosper begann als persönlicher Gedanke und entwickelt sich
-                                zu einem Ort für Einflüsse, Referenzen und Beobachtungen. Nicht jeder Eintrag
-                                muss eine Antwort geben. Manche Dinge sind einfach wert, festgehalten zu werden.
-                            </p>
-
-                            <p className="mt-6 text-white/80 text-lg leading-relaxed">
-                                Die Seite sammelt, was hängen bleibt: Musik, visuelle Identitäten,
-                                Street Culture, digitale Ästhetik und Gedanken aus dem Alltag. Eher Archiv
-                                als Anleitung. Eher Beobachtung als Ratschlag.
-                            </p>
-
-                            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-6">
-                                <p className="text-white/90 leading-relaxed">
-                                    <span className="text-[#d4af37] font-semibold">
-                                        Always Strive And Prosper
-                                    </span>{" "}
-                                    steht hier für eine Haltung: aufmerksam bleiben, Dinge sammeln,
-                                    Geschmack entwickeln und Gedanken nicht zu früh abschließen.
+                            <div className="space-y-6 text-lg leading-relaxed text-paper/80">
+                                <p>
+                                    The page collects what stays: music, visual identities, street
+                                    culture, digital aesthetics and notes from the day.
+                                </p>
+                                <p className="text-paper">
+                                    Always Strive And Prosper stands for a posture — stay attentive,
+                                    collect things, develop taste, and don&apos;t close thoughts
+                                    too soon.
                                 </p>
                             </div>
                         </div>
+                    </Container>
+                </section>
 
-                        {/* Bottom accent */}
-                        <div className="h-2 bg-gradient-to-r from-[#d4af37] via-neutral-900 to-black" />
-                    </section>
+                {/* Continue */}
+                <section>
+                    <Container className="py-20 md:py-28">
+                        <div className="flex flex-col gap-10 md:flex-row md:items-end md:justify-between">
+                            <div>
+                                <Eyebrow>Next · 02</Eyebrow>
+                                <h3 className="mt-6 text-3xl md:text-4xl font-medium tracking-tight">
+                                    Continue with Field Notes
+                                </h3>
+                                <p className="mt-4 max-w-md text-base leading-relaxed text-neutral-500">
+                                    Weekly fragments from culture, sound, style and thought.
+                                </p>
+                            </div>
 
-                    {/* Divider (Balken wie Startseite) */}
-                    <div className="my-10 md:my-14">
-                        <div className="h-px bg-neutral-200" />
-                        <div className="mx-auto mt-3 h-1 w-20 bg-[#d4af37]" />
-                    </div>
-
-                    {/* CTA */}
-                    <section className="mt-10 md:mt-14 flex flex-col md:flex-row items-start md:items-center justify-between gap-6 rounded-2xl border border-neutral-200 bg-white p-6 md:p-10 shadow-lg">
-                        <div>
-                            <h3 className="text-xl md:text-2xl font-extrabold">
-                                Weiter mit den Field Notes
-                            </h3>
-                            <p className="mt-2 text-neutral-600">
-                                Fragmente, Beobachtungen und kleine Gedanken aus dem laufenden Archiv.
-                            </p>
+                            <a
+                                href="/daily"
+                                className="group inline-flex items-center gap-3 self-start text-[11px] uppercase tracking-[0.28em] text-ink md:self-auto"
+                            >
+                                <span className="inline-block h-px w-8 bg-ink transition group-hover:w-12 group-hover:bg-gold" />
+                                View Field Notes
+                            </a>
                         </div>
-
-                        <a
-                            href="/daily"
-                            className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-white font-semibold shadow-md hover:bg-neutral-900 transition"
-                        >
-                            View Field Notes →
-                        </a>
-                    </section>
-                </div>
+                    </Container>
+                </section>
             </main>
 
             <SiteFooter />
-        </div>
+        </>
     );
 }
